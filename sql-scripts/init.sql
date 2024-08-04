@@ -1,0 +1,7 @@
+CREATE TABLE animals (
+    id uuid PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type NUMERIC NOT NULL,
+    image_url VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
