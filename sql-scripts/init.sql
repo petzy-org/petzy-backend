@@ -26,10 +26,11 @@ CREATE TABLE "shelters" (
     "description" VARCHAR,
     "contact" UUID,
     "donations" VARCHAR ARRAY,
+    "credentials" UUID,
     PRIMARY KEY("id")
 );
 
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     "id" UUID NOT NULL UNIQUE,
     "name" VARCHAR,
     "contact" UUID,
@@ -37,8 +38,15 @@ CREATE TABLE "user" (
     "description" VARCHAR,
     "preferences" UUID ARRAY,
     "type" SMALLINT,
+    "credentials" UUID,
     PRIMARY KEY("id")
 );
+
+CREATE TABLE "credentials" (
+    "id" UUID NOT NULL UNIQUE,
+    "email" VARCHAR NOT NULL,
+    "password" VARCHAR NOT NULL,
+)
 
 CREATE TABLE "pictures" (
     "id" UUID NOT NULL UNIQUE,
@@ -46,7 +54,7 @@ CREATE TABLE "pictures" (
     PRIMARY KEY("id")
 );
 
-CREATE TABLE "contact" (
+CREATE TABLE "contacts" (
     "id" UUID NOT NULL UNIQUE,
     "mail" VARCHAR,
     "phoneNumber" VARCHAR,
@@ -59,8 +67,14 @@ ALTER TABLE "animals"
 ADD FOREIGN KEY("shelterId") REFERENCES "shelters"("id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "shelters"
-ADD FOREIGN KEY("contact") REFERENCES "contact"("id")
+ADD FOREIGN KEY("contact") REFERENCES "contacts"("id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE "user"
-ADD FOREIGN KEY("contact") REFERENCES "contact"("id")
+ALTER TABLE "users"
+ADD FOREIGN KEY("contact") REFERENCES "contacts"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "shelters"
+ADD FOREIGN KEY("credentials") REFERENCES "credentials"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "users"
+ADD FOREIGN KEY("credentials") REFERENCES "credentials"("id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
