@@ -46,6 +46,7 @@ CREATE TABLE "credentials" (
     "id" UUID NOT NULL UNIQUE,
     "email" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
+    "role" VARCHAR NOT NULL
 )
 
 CREATE TABLE "pictures" (
