@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: toor
-      POSTGRES_DB: exampledb
+      POSTGRES_DB: petzy
     volumes:
       - ./sql-scripts:/docker-entrypoint-initdb.d
     ports:
