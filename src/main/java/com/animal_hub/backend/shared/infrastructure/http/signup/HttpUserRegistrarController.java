@@ -19,7 +19,7 @@ public class HttpUserRegistrarController {
 
     @PostMapping
     public ResponseEntity<Void> signUp(@RequestBody SignUpRequest signUpRequest) {
-        signUpUseCase.execute(new SignUpCommand(signUpRequest.email(), signUpRequest.password(),signUpRequest.userRole().getUserType()));
+        signUpUseCase.execute(new SignUpCommand(signUpRequest.userId(), signUpRequest.email(), signUpRequest.password(),signUpRequest.userRole().getUserType()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
