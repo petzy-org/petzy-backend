@@ -26,7 +26,6 @@ CREATE TABLE "shelters" (
     "description" VARCHAR,
     "contact" UUID,
     "donations" VARCHAR ARRAY,
-    "credentials" UUID,
     PRIMARY KEY("id")
 );
 
@@ -38,15 +37,16 @@ CREATE TABLE "users" (
     "description" VARCHAR,
     "preferences" UUID ARRAY,
     "type" SMALLINT,
-    "credentials" UUID,
     PRIMARY KEY("id")
 );
 
 CREATE TABLE "credentials" (
-    "id" UUID NOT NULL UNIQUE,
+    "id" INTEGER NOT NULL UNIQUE,
     "email" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
-    "role" VARCHAR NOT NULL
+    "role" VARCHAR NOT NULL,
+    "user_id" UUID NOT NULL UNIQUE,
+    PRIMARY KEY("id")
 )
 
 CREATE TABLE "pictures" (
@@ -73,9 +73,5 @@ ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "users"
 ADD FOREIGN KEY("contact") REFERENCES "contacts"("id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE "shelters"
-ADD FOREIGN KEY("credentials") REFERENCES "credentials"("id")
-ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE "users"
-ADD FOREIGN KEY("credentials") REFERENCES "credentials"("id")
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE INDEX "credentials_email"
+ON "credentials" ("email");
