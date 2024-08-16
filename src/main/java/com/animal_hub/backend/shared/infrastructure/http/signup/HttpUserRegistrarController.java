@@ -6,9 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/signup")
+import java.util.UUID;
+
+@RestController
 public class HttpUserRegistrarController {
 
     private final SignUpUseCase signUpUseCase;
@@ -17,9 +20,9 @@ public class HttpUserRegistrarController {
         this.signUpUseCase = signUpUseCase;
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<Void> signUp(@RequestBody SignUpRequest signUpRequest) {
-        signUpUseCase.execute(new SignUpCommand(signUpRequest.userId(), signUpRequest.email(), signUpRequest.password(),signUpRequest.userRole().getUserType()));
+        signUpUseCase.execute(new SignUpCommand(UUID.fromString(signUpRequest.userId()), signUpRequest.email(), signUpRequest.password(),signUpRequest.userRole().getUserType()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

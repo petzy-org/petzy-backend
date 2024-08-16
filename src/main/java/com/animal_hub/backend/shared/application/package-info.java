@@ -1,1 +1,0 @@
-package com.animal_hub.backend.shared.application;
