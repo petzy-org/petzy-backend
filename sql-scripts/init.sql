@@ -1,4 +1,4 @@
-CREATE TABLE "animals" (
+CREATE TABLE IF NOT EXISTS "animals" (
     "id" UUID NOT NULL UNIQUE,
     "pictures" UUID ARRAY,
     "type" SMALLINT,
@@ -14,7 +14,7 @@ CREATE TABLE "animals" (
     PRIMARY KEY("id")
 );
 
-CREATE TABLE "shelters" (
+CREATE TABLE IF NOT EXISTS "shelters" (
     "id" UUID NOT NULL UNIQUE,
     "name" VARCHAR,
     "country" VARCHAR,
@@ -29,7 +29,7 @@ CREATE TABLE "shelters" (
     PRIMARY KEY("id")
 );
 
-CREATE TABLE "users" (
+CREATE TABLE IF NOT EXISTS "users" (
     "id" UUID NOT NULL UNIQUE,
     "name" VARCHAR,
     "contact" UUID,
@@ -40,22 +40,23 @@ CREATE TABLE "users" (
     PRIMARY KEY("id")
 );
 
-CREATE TABLE "credentials" (
+CREATE TABLE IF NOT EXISTS "credentials" (
     "id" INTEGER NOT NULL UNIQUE,
     "email" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
     "role" VARCHAR NOT NULL,
     "user_id" UUID NOT NULL UNIQUE,
-    PRIMARY KEY("id")
-)
+    PRIMARY KEY("id"),
+    UNIQUE("email")
+);
 
-CREATE TABLE "pictures" (
+CREATE TABLE IF NOT EXISTS "pictures" (
     "id" UUID NOT NULL UNIQUE,
     "url" VARCHAR,
     PRIMARY KEY("id")
 );
 
-CREATE TABLE "contacts" (
+CREATE TABLE IF NOT EXISTS "contacts" (
     "id" UUID NOT NULL UNIQUE,
     "mail" VARCHAR,
     "phoneNumber" VARCHAR,
