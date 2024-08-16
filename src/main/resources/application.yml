@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: 'petzy_backend'
+  datasource:
+    url: ${PG_DB_JDBC_URI:jdbc:postgresql://localhost:5432/exampledb}
+    username: ${PG_DB_JDBC_USER:root}
+    password: ${PG_DB_JDBC_PASSWORD:toor}
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  jpa:
+    hibernate:
+      ddl-auto: none
