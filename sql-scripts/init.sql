@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS "animals" (
     "id" UUID NOT NULL UNIQUE,
     "pictures" UUID ARRAY,
     "type" SMALLINT,
-    "shelterId" UUID,
+    "shelterId" UUID NOT NULL,
     "description" VARCHAR,
     "createdAt" TIMESTAMP,
     "updatedAt" TIMESTAMP,
@@ -65,6 +65,18 @@ CREATE TABLE IF NOT EXISTS "contacts" (
     PRIMARY KEY("id")
 );
 
+CREATE TABLE IF NOT EXISTS "adoption_requests" (
+    "id" UUID NOT NULL UNIQUE,
+    "animalId" UUID NOT NULL,
+    "userId" UUID NOT NULL,
+    "createdAt" TIMESTAMP NOT NULL,
+    "details" VARCHAR,
+    "status" VARCHAR
+    PRIMARY KEY("id")
+);
+
+
+
 ALTER TABLE "animals"
 ADD FOREIGN KEY("shelterId") REFERENCES "shelters"("id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
@@ -76,3 +88,9 @@ ADD FOREIGN KEY("contact") REFERENCES "contacts"("id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE INDEX "credentials_email"
 ON "credentials" ("email");
+ALTER TABLE "adoption_requests"
+ADD FOREIGN KEY("animalId") REFERENCES "animals"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "adoption_requests"
+ADD FOREIGN KEY("userId") REFERENCES "users"("id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
