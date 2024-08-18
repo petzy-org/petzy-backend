@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS "adoption_requests" (
     "userId" UUID NOT NULL,
     "createdAt" TIMESTAMP NOT NULL,
     "details" VARCHAR,
+    "status" VARCHAR
     PRIMARY KEY("id")
 );
 
